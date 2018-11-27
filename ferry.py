@@ -22,11 +22,13 @@ def main_menu():
         print("PURCHASING MODULE ")
         purchase()
     elif main_short_code == "v":
-        print("view")
+        print("SEATING ARRANGEMENT MODULE")
+        seats()
     elif main_short_code == "q":
         os.system('clear')
         exit()
     else:
+        os.system('clear')
         print("Short code used is not recognised")
         print("Try again")
         main_menu()
@@ -46,7 +48,30 @@ def purchase():
     elif purchasing_short_code == "m":
         main_menu()
     else:
+        os.system('clear')
         print("Short code used is not recognised")
         print("Try again")
+        purchase()
 
-main_menu() 
+def seats():
+
+    """
+    displays Seating Chart based on ferry id and fery time
+    """
+
+    print("Continue using one of the following shortcodes:" + "\n F- to select Ferry ID \n T- to select Trip Time \n M – to return to Main Menu \n")
+    seat_short_code = input("Short code: ").lower()
+    if seat_short_code == "f":
+        print("Enter the Ferry ID")
+    elif seat_short_code == "e":
+        print("Select trip time")
+    elif seat_short_code == "m":
+        main_menu()
+    else:
+        os.system('clear')
+        print("Short code used is not recognised")
+        print("Try again")
+        seats()
+    
+
+main_menu()
