@@ -1,4 +1,5 @@
 import os
+import datetime as dt
 
 def main_menu():
 
@@ -43,9 +44,11 @@ def purchase():
     purchasing_short_code = input("Short code: ").lower()
     if purchasing_short_code == "b":
         print("Business class")
+        available()
     elif purchasing_short_code == "e":
         print("Economy class")
     elif purchasing_short_code == "m":
+        os.system('clear')
         main_menu()
     else:
         os.system('clear')
@@ -66,12 +69,66 @@ def seats():
     elif seat_short_code == "e":
         print("Select trip time")
     elif seat_short_code == "m":
+        os.system('clear')
         main_menu()
     else:
         os.system('clear')
         print("Short code used is not recognised")
         print("Try again")
         seats()
+
+def available():
+
+    """
+    Function that shows current time and ferries that have left and those that are available throughout the day
+    """
+    print("The time is now :")
+    
+    # Getting the current time in the 12 hour system
+
+    current_hour=dt.datetime.now().hour
+    current_minute=str(dt.datetime.now().minute)
+    if current_hour > 12:
+        current_hour_formatted = str(current_hour - 12) 
+        print(current_hour_formatted+":"+current_minute+" pm")
+    elif current_hour == 12:
+        print(current_hour + " noon")
+    else:
+        print(current_hour +":"+current_minute+"am")
+    
+    # showing already departed ferries based on time
+
+    print("The already departed ferries are as follows: ")
+    base_time = 10
+    final_time = 17
+    current_time = dt.datetime.now().hour
+
+    while True: 
+        if current_time > base_time and current_time < final_time:
+            print(str(base_time)+":00 hrs ferry") 
+            base_time = base_time + 1
+            print(str(base_time)+":00 hrs ferry")
+            if base_time == final_time:
+                break 
+            break
+        elif current_time > final_time :
+            print("The ferry service is currently closed the next ferry leaves at "+ str(base_time)+" am" )
+            break
+        else:
+            print("no ferry has left yet")
+            break
+
+    #showing available ferries based on time
     
 
+
 main_menu()
+
+# person’s name,
+# seat number, whether it is in the business or economy class of the ferry, Date and
+# time of departure, Source and Destination of the trip and Ferry ID.
+
+# Assume the company has at least 8 ferries - each with a
+# different Ferry ID, which travel at one-hour intervals from 10 am to 5 pm daily.
+
+
