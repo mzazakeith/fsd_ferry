@@ -47,6 +47,7 @@ def purchase():
         available()
     elif purchasing_short_code == "e":
         print("Economy class")
+        available()
     elif purchasing_short_code == "m":
         os.system('clear')
         main_menu()
@@ -92,13 +93,13 @@ def available():
         current_hour_formatted = str(current_hour - 12) 
         print(current_hour_formatted+":"+current_minute+" pm")
     elif current_hour == 12:
-        print(current_hour + " noon")
+        print(str(current_hour) + " noon")
     else:
-        print(current_hour +":"+current_minute+"am")
+        print(str(current_hour) +":"+current_minute+" am")
     
     # showing already departed ferries based on time
 
-    print("The already departed ferries are as follows: ")
+    print("\nThe already departed ferries are as follows: ")
     base_time = 10
     final_time = 17
     current_time = dt.datetime.now().hour
@@ -114,11 +115,59 @@ def available():
         elif current_time > final_time :
             print("The ferry service is currently closed the next ferry leaves at "+ str(base_time)+" am" )
             break
+        elif current_time == base_time:
+            print(str(base_time)+":00 hrs ferry")
+            break
         else:
             print("no ferry has left yet")
             break
 
     #showing available ferries based on time
+    print("\nThe available ferries are as follows: ")
+    while True:
+        if current_time < base_time:
+            print(str(base_time)+":00 hrs ferry")
+            base_time = base_time + 1
+            if base_time == final_time + 1:
+                break
+        if current_time == base_time:
+            base_time = 11
+            print(str(base_time)+":00 hrs ferry")
+            base_time = base_time + 1
+            if base_time == final_time + 1:
+                break
+        if current_time > base_time :
+            base_time = current_time + 1
+            print(str(base_time)+":00 hrs ferry")
+            base_time = base_time + 1
+            if base_time == final_time + 1:
+                break
+
+    booking_proceed()
+
+def booking_proceed():
+    """
+    Function to ask if a user wants to proceed with the seat booking opeartion
+    """
+    print("\n Do you want to proceed? ")
+    book_proceed = input("[Y/N]: ")
+    book_proceed = book_proceed.lower()
+    if book_proceed == "y":
+        continue_booking()
+    elif book_proceed == "n":
+        os.system('clear')
+        main_menu()
+    else:
+        print("Invalid response !!!")
+        booking_proceed()
+
+
+def continue_booking():
+    """
+    Function to allow the user to book the trip he/ she wants
+    """
+    print("dummy")
+
     
 
 
