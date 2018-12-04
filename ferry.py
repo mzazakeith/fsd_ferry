@@ -69,8 +69,8 @@ class Purchasing_module:
         # showing already departed ferries based on time
 
         print("\nThe already departed ferries are as follows: ")
-        base_time = 17
-        final_time = 22
+        base_time = 10
+        final_time = 17
         current_time = dt.datetime.now().hour
 
         while True: 
